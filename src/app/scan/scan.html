@@ -1,0 +1,44 @@
+<div class="scan-layout">
+
+
+  <main class="scan-content">
+    <!--div class="loading-overlay" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>กำลังประมวลผลภาพด้วย AI...</p>
+    </div-->
+
+    <div class="camera-box">
+      <video #camera1 autoplay playsinline muted></video>
+      <span class="camera-label">Top View</span>
+    </div>
+    <div class="camera-box">
+      <video #camera2 autoplay playsinline muted></video>
+      <span class="camera-label">Side View 1</span>
+    </div>
+    <div class="camera-box">
+      <video #camera3 autoplay playsinline muted></video>
+      <span class="camera-label">Side View 2</span>
+    </div>
+
+    <canvas #canvas1 style="display:none"></canvas>
+    <canvas #canvas2 style="display:none"></canvas>
+    <canvas #canvas3 style="display:none"></canvas>
+
+    <div class="action-box">
+      <button class="action-btn confirm-btn" (click)="confirmScan()" [disabled]="isLoading">
+        <svg *ngIf="!isLoading" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>{{ isLoading ? 'Processing...' : 'Confirm' }}</span>
+      </button>
+
+      <button class="action-btn cancel-btn" routerLink="/hub" [disabled]="isLoading">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Cancel</span>
+      </button>
+    </div>
+  </main>
+</div>

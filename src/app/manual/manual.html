@@ -1,0 +1,67 @@
+<div class="manual-layout">
+  <header class="navbar">
+    <div class="brand-section">
+      <div class="logo-circle"><span>///</span></div>
+      <h1 class="brand-title">Bakery Automated</h1>
+    </div>
+    <div class="action-section">
+      <button class="icon-btn outline-btn">?</button>
+      <button class="icon-btn outline-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <div class="product-section">
+      <div class="product-grid">
+        <div class="product-card" *ngFor="let product of products" (click)="addToCart(product)">
+          <div class="product-header">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <span class="product-price">{{ product.price }} บาท</span>
+          </div>
+          <div class="product-image">
+            <img [src]="product.image" [alt]="product.name">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-section">
+      <h2 class="cart-title">รายการ</h2>
+      
+      <div class="cart-list">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <div class="item-details">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-price">{{ item.price }} บาท</span>
+          </div>
+          <div class="item-actions">
+            <span class="item-qty">{{ item.quantity }}</span>
+            <button class="btn-minus" (click)="decreaseQuantity(item)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-footer">
+        <div class="total-row">
+          <span class="total-label">จำนวน</span>
+          <span class="total-value">{{ getTotalQuantity() }} ชิ้น</span>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-confirm" (click)="goToCheckout()">ยืนยัน</button>
+          <button class="btn btn-cancel" routerLink="/hub">ยกเลิก</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>

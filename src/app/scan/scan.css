@@ -1,0 +1,93 @@
+/* เลย์เอาต์หลัก */
+.scan-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+
+
+/* --- พื้นที่กล้องและปุ่ม (Grid 2x2) --- */
+.scan-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* สไตล์ของกรอบกล้อง */
+.camera-box {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* วิดีโอให้เต็มกรอบ */
+.camera-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ตัวหนังสือบอกตำแหน่งกล้อง */
+.camera-label {
+  color: #666;
+  font-size: 1.5rem;
+  z-index: 0;
+}
+
+/* พื้นที่ของปุ่มกด */
+.action-box {
+  display: flex;
+  gap: 16px;
+}
+
+/* สไตล์พื้นฐานของปุ่ม */
+.action-btn {
+  flex: 1;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.action-btn:hover {
+  transform: translateY(-4px);
+}
+
+/* ปุ่ม Confirm สีส้ม */
+.confirm-btn {
+  background-color: #d86600;
+  color: white;
+  box-shadow: 0 4px 10px rgba(216, 102, 0, 0.3);
+}
+
+/* ปุ่ม Cancel สีขาวขอบเทา */
+.cancel-btn {
+  background-color: white;
+  color: #333;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cancel-btn:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,83 @@
+<div class="checkout-layout">
+  <header class="navbar">
+    <div class="brand-section">
+      <div class="logo-circle"><span>///</span></div>
+      <h1 class="brand-title">Bakery Automated</h1>
+    </div>
+    <div class="action-section">
+      <button class="icon-btn outline-btn">?</button>
+      <button class="icon-btn outline-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <div class="summary-section">
+      <div class="summary-card">
+        
+        <div class="table-header">
+          <div class="col-name">รายการทั้งหมด</div>
+          <div class="col-qty">จำนวน</div>
+          <div class="col-price">ราคา (บาท)</div>
+        </div>
+
+        <div class="table-body">
+          <div class="table-row" *ngFor="let item of cartItems">
+            <div class="col-name font-bold">{{ item.name }}</div>
+            <div class="col-qty">{{ item.quantity }}</div>
+            <div class="col-price font-bold">{{ item.price * item.quantity }}</div>
+          </div>
+          
+          <div class="empty-cart" *ngIf="cartItems.length === 0">
+            ไม่มีสินค้าในรายการ
+          </div>
+        </div>
+
+        <div class="table-footer">
+          <div class="total-group">
+            <span class="total-label">จำนวนทั้งหมด</span>
+            <span class="total-amount">{{ totalQuantity }}</span>
+            <span class="total-label">ชิ้น</span>
+            <span class="total-label" style="margin-left: 24px;">ราคาทั้งหมด</span>
+            <span class="total-amount">{{ totalPrice }}</span>
+            <span class="total-label">บาท</span>
+          </div>
+          <div class="footer-actions">
+            <button class="btn-edit" routerLink="/manual">แก้ไข</button>
+            <button class="btn-back" routerLink="/hub">ย้อนกลับ</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="payment-section">
+      
+      <button class="payment-card btn-qr" (click)="selectPaymentMethod('Thai QR')">
+        <div class="qr-logo-placeholder">
+          <span class="icon-plus">⛌</span> <div class="qr-text">
+            <span>THAI QR</span>
+            <span>PAYMENT</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="payment-card btn-outline" (click)="selectPaymentMethod('Credit Card')">
+        <div class="payment-icon">💳</div>
+        <span class="payment-name">บัตรเครดิต</span>
+      </button>
+
+      <button class="payment-card btn-outline" (click)="selectPaymentMethod('Cash')">
+        <div class="payment-icon">฿</div>
+        <span class="payment-name">เงินสด</span>
+      </button>
+
+    </div>
+
+  </main>
+</div>

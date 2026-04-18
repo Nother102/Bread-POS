@@ -1,0 +1,129 @@
+/* รีเซ็ตค่าเริ่มต้นพื้นฐานบางส่วน */
+.hub-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* --- ส่วนของ Navbar ด้านบน --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #d86600; /* สีส้มตามรูป */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.brand-title {
+  color: #d86600;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.action-section {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #d86600;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #fff3e0;
+  border-color: #d86600;
+}
+
+/* --- ส่วนของ Content ตรงกลาง --- */
+.content-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.card-container {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap; /* เผื่อหน้าจอเล็กมันจะตกลงมาอยู่บรรทัดใหม่ */
+  justify-content: center;
+}
+
+/* สไตล์พื้นฐานของปุ่มสี่เหลี่ยม */
+.menu-card {
+  width: 320px;
+  height: 220px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+}
+
+.menu-card h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ปุ่ม Scan (สีส้ม) */
+.primary-card {
+  background-color: #d86600;
+  color: white;
+  box-shadow: 0 4px 10px rgba(216, 102, 0, 0.3);
+}
+
+/* ปุ่ม Manually (สีขาว) */
+.secondary-card {
+  background-color: white;
+  color: #444;
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.secondary-card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}

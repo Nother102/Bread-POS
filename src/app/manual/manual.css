@@ -1,0 +1,217 @@
+/* เลย์เอาต์หลัก */
+.manual-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* Navbar (ใช้สไตล์เดิมจาก Hub ได้) */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: white;
+  border-bottom: 2px solid #f0f0f0;
+}
+.brand-section { display: flex; align-items: center; gap: 12px; }
+.logo-circle { width: 40px; height: 40px; background-color: #d86600; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-style: italic; font-size: 14px; }
+.brand-title { color: #d86600; font-size: 1.2rem; font-weight: 700; margin: 0; }
+.action-section { display: flex; gap: 12px; }
+.icon-btn { width: 44px; height: 44px; border-radius: 50%; background: white; border: 1px solid #ddd; cursor: pointer; color: #d86600; font-size: 1.2rem; }
+
+/* พื้นที่หลักแบ่ง 2 ฝั่ง */
+.main-content {
+  flex: 1;
+  display: flex;
+  padding: 24px;
+  gap: 24px;
+  overflow: hidden; /* ป้องกันไม่ให้ทะลุจอ */
+}
+
+/* --- ฝั่งซ้าย: สินค้า --- */
+.product-section {
+  flex: 2; /* กินพื้นที่มากกว่า (ประมาณ 66%) */
+  overflow-y: auto; /* ให้เลื่อนลงได้ถ้าสินค้าเยอะ */
+  padding-right: 12px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* แบ่งเป็น 3 คอลัมน์ */
+  gap: 16px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.product-card:active {
+  transform: scale(0.98);
+}
+
+.product-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-header h3.product-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.product-price {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- ฝั่งขวา: ตะกร้า --- */
+.cart-section {
+  flex: 1; /* กินพื้นที่ประมาณ 33% */
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.cart-title {
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.cart-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.item-price {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.item-qty {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btn-minus {
+  background-color: #b30000; /* สีแดงเข้ม */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* --- สรุปยอดและปุ่ม --- */
+.cart-footer {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  flex: 1;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.btn-confirm {
+  background-color: #d86600;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: white;
+  color: #333;
+  border: 2px solid #ddd;
+}
