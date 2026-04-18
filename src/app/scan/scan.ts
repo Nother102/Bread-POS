@@ -29,7 +29,7 @@ export class Scan implements AfterViewInit, OnDestroy {
 
   // 📌 ตัวแปรสำหรับระบบ AI
   isLoading: boolean = false;
-  private readonly AI_API_URL = 'http://192.168.51.246:5000/api/detect-bakery'; // อย่าลืมเปลี่ยน IP ให้ตรงกับเครื่องรัน Python
+  private readonly AI_API_URL = 'http://127.0.0.1:5000/api/detect-bakery'; // ถ้าเครื่องผู้ใช้ (เบราว์เซอร์) กับ Backend เป็นเครื่องเดียวกัน ใช้ 127.0.0.1 ได้เลย
 
   // 📌 Inject Service ที่จำเป็นเพิ่มเข้ามา
   constructor(
