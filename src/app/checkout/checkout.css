@@ -17,8 +17,8 @@
 .brand-section { display: flex; align-items: center; gap: 12px; }
 .logo-circle { width: 40px; height: 40px; background-color: #d86600; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-style: italic; font-size: 14px; }
 .brand-title { color: #d86600; font-size: 1.2rem; font-weight: 700; margin: 0; }
-.action-section { display: flex; gap: 12px; }
-.icon-btn { width: 44px; height: 44px; border-radius: 50%; background: white; border: 1px solid #ddd; cursor: pointer; color: #d86600; font-size: 1.2rem; }
+.action-section { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
+.icon-btn { box-sizing: border-box; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; flex-shrink: 0; cursor: pointer; color: #d86600; font-size: 1.2rem; font-weight: bold; line-height: 1; padding: 0; }
 
 .main-content {
   flex: 1;

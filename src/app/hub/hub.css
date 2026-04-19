@@ -45,21 +45,29 @@
 .action-section {
   display: flex;
   gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .icon-btn {
+  box-sizing: border-box;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   background: white;
   border: 1px solid #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   cursor: pointer;
   color: #d86600;
   font-size: 1.2rem;
   font-weight: bold;
+  line-height: 1;
+  padding: 0;
   transition: all 0.2s;
 }
 
