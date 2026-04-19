@@ -4,6 +4,7 @@
 
 - **Frontend**: Angular (SSR) และ Express
 - **Backend (AI Processing)**: Python (Flask, YOLO) สำหรับประมวลผลเซ็นเซอร์กล้องตรวจจับเบเกอรี่
+- Python 3.12.0 link https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe
 
 ---
 
@@ -11,15 +12,14 @@
 
 - **Node.js**: เวอร์ชัน 20.x หรือสูงกว่า (แนะนำเวอร์ชัน LTS)
 - **npm**: (ติดตั้งมาพร้อมกับ Node.js)
-- **Python**: เวอร์ชัน 3.9 หรือสูงกว่า (สำหรับระบบ Backend AI)
-
----
+- **Python**: ติดตั้งเวอร์ชัน 3.12 add to PATH (HIGH RECOMMEND สำหรับระบบ Backend AI)
+- Python 3.12.0 link https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe
 
 ## 2. การติดตั้ง (Installation)
 
 ### 2.1 ติดตั้งไลบรารีสำหรับฝั่ง Frontend (Angular/Node.js)
 
-เมื่อดาวน์โหลดโปรเจคมาแล้ว ให้เปิด Terminal ในโฟลเดอร์หลักของโปรเจคแล้วรันคำสั่ง:
+เมื่อดาวน์โหลดโปรเจคมาแล้ว ให้คลิ๊กขวาแล้วเปิด Terminal ในโฟลเดอร์หลักของโปรเจคแล้วรันคำสั่ง:
 
 ```bash
 npm install
