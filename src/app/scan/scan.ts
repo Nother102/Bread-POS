@@ -25,11 +25,11 @@ export class Scan implements AfterViewInit, OnDestroy {
   private streams: MediaStream[] = [];
 
   // ตำแหน่งกล้องเดิมของคุณที่ใช้งานได้
-  private selectedCameraIndices: number[] = [0, 1, 3]; 
+  private selectedCameraIndices: number[] = [0, 1, 2]; 
 
   // 📌 ตัวแปรสำหรับระบบ AI
   isLoading: boolean = false;
-  private readonly AI_API_URL = 'http://127.0.0.1:5000/api/detect-bakery'; // ถ้าเครื่องผู้ใช้ (เบราว์เซอร์) กับ Backend เป็นเครื่องเดียวกัน ใช้ 127.0.0.1 ได้เลย
+  private readonly AI_API_URL = 'http://10.214.135.85:5000/api/detect-bakery'; // ถ้าเครื่องผู้ใช้ (เบราว์เซอร์) กับ Backend เป็นเครื่องเดียวกัน ใช้ 127.0.0.1 ได้เลย
 
   // 📌 Inject Service ที่จำเป็นเพิ่มเข้ามา
   constructor(

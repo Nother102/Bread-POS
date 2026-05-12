@@ -16,9 +16,17 @@ export class CartService {
 
   // ข้อมูลอ้างอิงของ AI
   private productMasterData: { [key: string]: { name: string, price: number } } = {
-    'Blue_doughnut': { name: 'โดนัทสีน้ำเงิน', price: 20 },
-    'Bread_with_filling': { name: 'ขนมปังมีไส้', price: 20 },
-    'Bread_with_chocolate_filling': { name: 'ขนมปังไส้ช็อกโกแลต', price: 20 },
+    'Blue_doughnut': { name: 'โดนัทสีน้ำเงิน', price: 25 },
+    'Bread_with_chocolate_filling': { name: 'ขนมปังมีไส้ช็อกโกแลต', price: 55 },
+    'Bread_with_filling': { name: 'ขนมปังมีไส้', price: 50 },
+    'Bread_with_milk_filling': { name: 'ขนมปังมีไส้นม', price: 50 },
+    'Bread_with_milk_tea_filling': { name: 'ขนมปังมีไส้ชาไทย', price: 50 },
+    'Bread_with_pandan_filling': { name: 'ขนมปังมีไส้สังขยาใบเตย', price: 55 },
+    'Green_doughnut': { name: 'โดนัทสีเขียว', price: 25 },
+    'Lotus_bun': { name: 'ขนมปังรูปดอกไม้', price: 30 },
+    'Melon_pang': { name: 'ขนมปังเมล่อน', price: 35 },
+    'Soft_bread': { name: 'ขนมปังไส้มะพร้าว (ใหญ่)', price: 35 },
+    'Soft_sesame_bun': { name: 'ขนมปังไส้มะพร้าว (เล็ก)', price: 25 },
   };
 
   constructor() { }

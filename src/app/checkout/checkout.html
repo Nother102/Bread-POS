@@ -80,4 +80,47 @@
     </div>
 
   </main>
+  <!-- Payment Popup -->
+  <div class="popup-overlay" *ngIf="showPaymentPopup">
+    <div class="popup-content">
+      <h2>{{ getPaymentTitle() }}</h2>
+
+      <!-- QR Image (เฉพาะ Thai QR เท่านั้น) -->
+      <div class="qr-container" *ngIf="selectedPaymentMethod === 'Thai QR'">
+        <div class="qr-placeholder">
+          <img src="/assets/images/placeholder/qr-promptpay.png" alt="Thai QR Payment" style="width: 200px; height: 200px; display: block; margin: auto; object-fit: contain;">
+        </div>
+      </div>
+
+      <!-- Payment Icon (สำหรับบัตรเครดิตและเงินสด) -->
+      <div class="popup-icon" *ngIf="selectedPaymentMethod === 'Credit Card'">
+        <span class="popup-icon-emoji">💳</span>
+      </div>
+      <div class="popup-icon" *ngIf="selectedPaymentMethod === 'Cash'">
+        <span class="popup-icon-emoji">฿</span>
+      </div>
+
+      <p class="qr-amount">ยอดชำระ: <strong>{{ totalPrice }}</strong> บาท</p>
+      
+      <div class="popup-actions">
+        <button class="btn-cancel" (click)="cancelPayment()">ยกเลิก</button>
+        <button class="btn-confirm" (click)="confirmPayment()">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Message Overlay -->
+  <div class="success-overlay" *ngIf="paymentSuccess">
+    <div class="success-content">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" width="80" height="80" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h2>ทำรายการสำเร็จ!</h2>
+      <p>กำลังพาคุณกลับสู่หน้าหลัก...</p>
+    </div>
+  </div>
+
 </div>

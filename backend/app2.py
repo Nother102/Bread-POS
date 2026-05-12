@@ -32,36 +32,36 @@ if not os.path.exists(CHECK_DIR):
 
 # 🛑 ใส่ค่า Homography Matrix ของแต่ละกล้อง (ใช้ key ให้ตรงกับชื่อไฟล์ที่ส่งมาจาก Frontend)
 MATRICES = {
-    'image_top': np.array([
-        [-5.08889299e-02, -2.80277205e-04,  5.06050609e+01],
-        [ 3.35884618e-04,  7.18973312e-02, -3.67140116e+01],
-        [ 2.91062216e-05,  8.72889153e-04,  1.00000000e+00]
-    ], dtype=np.float32),
+    'image_top': np.array([[-5.00032430e-02, -7.65177052e-04,  4.82485606e+01],
+ [-8.06047739e-04,  7.13595532e-02, -3.47653043e+01],   
+ [-1.17996247e-05,  9.00743586e-04,  1.00000000e+00]], dtype=np.float32),
     
-    'image_side1': np.array([
-        [ 2.22146547e-02,  5.74401093e-02, -4.91531428e+01],
-        [ 4.10313587e-02, -3.24147295e-02, -2.46764248e+01],
-        [-2.39754596e-05,  8.03733525e-04,  1.00000000e+00]
-    ], dtype=np.float32),
+    'image_side1': np.array([[ 2.05042322e-02,  5.40077936e-02, -4.47663266e+01],
+ [ 3.91119380e-02, -2.99589666e-02, -2.20341817e+01],   
+ [-7.17092000e-05,  7.28945223e-04,  1.00000000e+00]], dtype=np.float32),
     
-    'image_side2': np.array([
-        [ 2.43549370e-02, -5.64667356e-02,  2.01808770e+00],
-        [-4.11519092e-02, -3.52781146e-02,  5.62171956e+01],
-        [ 5.54636489e-05,  8.09633550e-04,  1.00000000e+00]
-    ], dtype=np.float32)
+    'image_side2': np.array([[ 2.38871427e-02, -5.80375839e-02,  2.09276797e+00],
+ [-4.23959621e-02, -3.47948956e-02,  5.75919543e+01],
+ [ 8.56117587e-05,  8.07649380e-04,  1.00000000e+00]], dtype=np.float32)
 }
-
 # ตั้งค่าเงื่อนไขของคลาสขนมปัง
 SPECIFIC_FILLINGS = [
+"Blue_doughnut",
     "Bread_with_chocolate_filling",
+    # "Bread_with_filling",  <-- ❌ ลบบรรทัดนี้ทิ้งครับ
     "Bread_with_milk_filling",
     "Bread_with_milk_tea_filling",
-    "Bread_with_pandan_filling"
+    "Bread_with_pandan_filling",
+    "Green_doughnut",
+    "Lotus_bun",
+    "Melon_pang",
+    "Soft_bread",
+    "Soft_sesame_bun"
 ]
 GENERIC_FILLING = "Bread_with_filling"
 
 # ระยะห่างสูงสุดที่จะถือว่าเป็นขนมปัง "ชิ้นเดียวกัน" (หน่วยเป็นเซนติเมตร)
-DISTANCE_THRESHOLD = 5.0 
+DISTANCE_THRESHOLD = 8
 
 # ========================================================
 # 3. ฟังก์ชันจัดกลุ่มและแก้ปัญหาชื่อคลาส (Sensor Fusion)
@@ -93,22 +93,22 @@ def merge_and_resolve_items(all_detections):
             })
 
     # 3.2 หาข้อสรุปของแต่ละชิ้น (Rule-based Resolution)
+# 3.2 หาข้อสรุปของแต่ละชิ้น (Rule-based Resolution)
     final_items = []
     for idx, group in enumerate(grouped_items):
         members = group['members']
-        classes_in_group = [m['class_name'] for m in members]
         
-        specific_found = [c for c in classes_in_group if c in SPECIFIC_FILLINGS]
-        has_generic = GENERIC_FILLING in classes_in_group
+        # 📌 กรองหาเฉพาะสมาชิกที่ถูกระบุว่าเป็น "ไส้เฉพาะเจาะจง" (Specific Fillings)
+        specific_members = [m for m in members if m['class_name'] in SPECIFIC_FILLINGS]
         
-        if has_generic and specific_found:
-            best_conf = -1
-            final_class = None
-            for m in members:
-                if m['class_name'] in SPECIFIC_FILLINGS and m['conf'] > best_conf:
-                    final_class = m['class_name']
-                    best_conf = m['conf']
+        if specific_members:
+            # ✅ ถ้าในกลุ่มนี้ มีกล้องใดกล้องหนึ่งเห็นเป็นไส้เฉพาะ
+            # ให้เลือกไส้เฉพาะที่มีค่า Conf สูงสุด (ไม่สนใจคลาส Generic เลย)
+            best_specific = max(specific_members, key=lambda m: m['conf'])
+            final_class = best_specific['class_name']
         else:
+            # ❌ ถ้าไม่มีกล้องไหนเห็นไส้เฉพาะเลย (มีแต่ Generic ล้วนๆ)
+            # ค่อยเลือกตัวที่ Conf สูงสุดตามปกติ
             best_member = max(members, key=lambda m: m['conf'])
             final_class = best_member['class_name']
 
@@ -153,12 +153,14 @@ def detect_bakery():
         h_matrix = MATRICES.get(cam_name)
         
         # รัน YOLO
-        results = model(img_cv, imgsz=640, conf=0.5, verbose=False)
+        results = model(img_cv, imgsz=1080, conf=0.5, verbose=False)
         
-        # 📌 ดึงภาพที่มีกรอบ Bounding Box จาก YOLO มาเป็น numpy array
-        annotated_img = results[0].plot()
+        # 📌 สั่งเซฟภาพที่มีกรอบ Bounding Box ลงโฟลเดอร์ ./check
+        save_filename = f"{timestamp_str}_{cam_name}.jpg"
+        save_path = os.path.join(CHECK_DIR, save_filename)
+        results[0].save(filename=save_path)
         
-        # ดึงข้อมูลการตรวจจับ + วาดพิกัด CM ลงบนภาพ
+        # ดึงข้อมูลการตรวจจับ
         for box in results[0].boxes:
             class_id = int(box.cls[0].cpu().numpy())
             class_name = model.names[class_id]
@@ -168,27 +170,12 @@ def detect_bakery():
             center_x = (x1 + x2) / 2.0
             center_y = (y1 + y2) / 2.0
             
-            # แปลง Pixel เป็น CM ผ่าน Homography
+            # แปลง Pixel เป็น CM
             point_px = np.array([[[center_x, center_y]]], dtype=np.float32)
             point_cm = cv2.perspectiveTransform(point_px, h_matrix)
             
             real_x_cm = float(point_cm[0][0][0])
             real_y_cm = float(point_cm[0][0][1])
-            
-            # 🖊️ วาดข้อความพิกัด CM ลงบนภาพก่อน save
-            label_cm = f"X:{real_x_cm:.1f}cm Y:{real_y_cm:.1f}cm"
-            text_x = int(x1)
-            text_y = max(int(y1) - 10, 20)  # วางไว้เหนือ bbox ไม่ให้ออกนอกขอบภาพ
-            cv2.putText(
-                annotated_img,
-                label_cm,
-                (text_x, text_y),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.55,
-                (0, 255, 255),  # สีเหลือง-เขียว (BGR)
-                2,
-                cv2.LINE_AA
-            )
             
             all_raw_detections.append({
                 'class_name': class_name,
@@ -197,11 +184,6 @@ def detect_bakery():
                 'y': real_y_cm,
                 'camera': cam_name
             })
-        
-        # 💾 เซฟภาพที่มีทั้ง Bounding Box และพิกัด CM
-        save_filename = f"{timestamp_str}_{cam_name}.jpg"
-        save_path = os.path.join(CHECK_DIR, save_filename)
-        cv2.imwrite(save_path, annotated_img)
 
     # ส่งเข้าฟังก์ชัน Match เพื่อรวมร่าง
     final_results = merge_and_resolve_items(all_raw_detections)

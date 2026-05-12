@@ -223,3 +223,138 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+/* -------------------------------------
+   Popup / Overlay Styles
+------------------------------------- */
+.popup-overlay, .success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+  color: #1c355e;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.qr-placeholder {
+  border: 4px solid #1c355e;
+  padding: 16px;
+  border-radius: 12px;
+  background: white;
+}
+
+.qr-amount {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.qr-amount strong {
+  font-size: 1.5rem;
+  color: #d86600;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: white;
+  border: 2px solid #ccc;
+  color: #666;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-confirm {
+  flex: 1;
+  background: #d86600;
+  border: 2px solid #d86600;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm:hover {
+  background: #bf5a00;
+  border-color: #bf5a00;
+}
+
+.success-content {
+  background: white;
+  padding: 48px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: scaleUp 0.3s ease-out forwards;
+}
+
+.success-icon {
+  color: #4CAF50;
+  margin-bottom: 16px;
+}
+
+.success-content h2 {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.success-content p {
+  color: #666;
+  margin: 0;
+}
+
+.popup-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.popup-icon-emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

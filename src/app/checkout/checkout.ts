@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { CartService } from '../services/cart.service'; // ปรับ path ให้ตรงกับโปรเจกต์คุณ
+import { Router, RouterLink } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,7 +15,11 @@ export class Checkout implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private cartService: CartService) {}
+  showPaymentPopup: boolean = false;
+  selectedPaymentMethod: string = '';
+  paymentSuccess: boolean = false;
+
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit() {
     this.cartItems = this.cartService.getItems();
@@ -25,8 +29,33 @@ export class Checkout implements OnInit {
 
   // ฟังก์ชันจำลองเมื่อกดเลือกวิธีชำระเงิน
   selectPaymentMethod(method: string) {
-    console.log('เลือกวิธีชำระเงิน:', method);
-    // TODO: ใส่ Logic เชื่อมต่อ API ชำระเงินที่นี่
-    alert(`กำลังดำเนินการชำระเงินด้วย: ${method} ยอดรวม ${this.totalPrice} บาท`);
+    this.selectedPaymentMethod = method;
+    this.showPaymentPopup = true;
+  }
+
+  getPaymentTitle(): string {
+    switch (this.selectedPaymentMethod) {
+      case 'Thai QR': return 'ชำระเงินผ่าน Thai QR';
+      case 'Credit Card': return 'ชำระเงินด้วยบัตรเครดิต';
+      case 'Cash': return 'ชำระเงินด้วยเงินสด';
+      default: return 'ชำระเงิน';
+    }
+  }
+
+  confirmPayment() {
+    this.showPaymentPopup = false;
+    this.paymentSuccess = true;
+    this.cartService.clearCart();
+
+    // Redirect after showing success message
+    setTimeout(() => {
+      this.paymentSuccess = false;
+      this.router.navigate(['/hub']);
+    }, 2000);
+  }
+
+  cancelPayment() {
+    this.showPaymentPopup = false;
+    this.selectedPaymentMethod = '';
   }
 }
